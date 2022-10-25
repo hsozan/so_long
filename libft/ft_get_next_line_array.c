@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_get_next_line_array.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsozan <hsozan@student.42kocaeli.com.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 00:44:24 by hsozan            #+#    #+#             */
+/*   Updated: 2022/10/26 00:52:14 by hsozan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*get_save(char *save)
@@ -17,7 +29,8 @@ char	*get_save(char *save)
 		free(save);
 		return (0);
 	}
-	if (!(rtn = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1))))
+	rtn = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1));
+	if (!rtn)
 		return (0);
 	i++;
 	while (save[i])
@@ -37,7 +50,8 @@ char	*get_line(char *str)
 		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(rtn = malloc(sizeof(char) * (i + 1))))
+	rtn = malloc(sizeof(char) * (i + 1));
+	if (!rtn)
 		return (0);
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -49,7 +63,7 @@ char	*get_line(char *str)
 	return (rtn);
 }
 
-int		get_next_line_array(int fd, char **line)
+int	get_next_line_array(int fd, char **line)
 {
 	char			*buff;
 	static char		*save;
@@ -58,14 +72,16 @@ int		get_next_line_array(int fd, char **line)
 	reader = 1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
 		return (-1);
 	while (!has_return(save) && reader != 0)
 	{
-		if ((reader = read(fd, buff, BUFFER_SIZE)) == -1)
+		reader = read(fd, buff, BUFFER_SIZE);
+		if (reader == -1 || reader == 0)
 		{
 			free(buff);
-			return (-1);
+			return (0);
 		}
 		buff[reader] = '\0';
 		save = join_str(save, buff);
@@ -73,7 +89,5 @@ int		get_next_line_array(int fd, char **line)
 	free(buff);
 	*line = get_line(save);
 	save = get_save(save);
-	if (reader == 0)
-		return (0);
 	return (1);
 }

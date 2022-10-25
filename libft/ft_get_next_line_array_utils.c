@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_get_next_line_array_utils.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsozan <hsozan@student.42kocaeli.com.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 00:52:54 by hsozan            #+#    #+#             */
+/*   Updated: 2022/10/26 00:54:20 by hsozan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char		*join_str(char const *s1, char const *s2)
+char	*join_str(char const *s1, char const *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -22,9 +34,9 @@ char		*join_str(char const *s1, char const *s2)
 	return (rtn);
 }
 
-int			has_return(char *str)
+int	has_return(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)

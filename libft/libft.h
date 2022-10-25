@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 16:29:28 by apuchill          #+#    #+#             */
-/*   Updated: 2022/02/25 07:36:01 by hsozan           ###   ########.fr       */
+/*   Updated: 2022/10/26 00:57:36 by hsozan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_list
 
 typedef struct sa_list
 {
-	int             n;
+	int				n;
 	int				index;
 	struct sa_list	*next;
 }				t_list;
@@ -83,10 +83,10 @@ void			ft_lstadd_front(t_lib_list **lst, t_lib_list *new);
 void			ft_lstclear(t_lib_list **lst, void (*del)(void*));
 void			ft_lstdelone(t_lib_list *lst, void (*del)(void *));
 void			ft_lstiter(t_lib_list *lst, void (*f)(void *));
-t_lib_list			*ft_lstlast(t_lib_list *lst);
-t_lib_list			*ft_lstmap(t_lib_list *lst, void *(*f)(void *),
+t_lib_list		*ft_lstlast(t_lib_list *lst);
+t_lib_list		*ft_lstmap(t_lib_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-t_lib_list			*ft_lstnew(void *content);
+t_lib_list		*ft_lstnew(void *content);
 int				ft_lstsize(t_list *lst);
 void			*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);
@@ -111,7 +111,7 @@ char			*ft_strchr(const char *s, int c);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strdup(const char *s1);
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin(char *s1, char *s2);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlen(const char *s);

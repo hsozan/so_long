@@ -1,37 +1,31 @@
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
+CC			= gcc -Wall -Wextra -Werror
 LFLAGS		= -framework OpenGL -framework AppKit
 NAME		= so_long
-#BNAME		= so_long_bonus
-SRCS 		= src/so_long.c src/ft_error.c src/ft_check_utils.c src/ft_check.c src/ft_check_valid.c
-#BSRCS		= bonus/so_long_b.c bonus/convert_xpms_b.c bonus/ft_create_map_b.c bonus/ft_init_map_b.c bonus/ft_split_fs_b.c bonus/key_events_b.c bonus/so_long_utils_b.c bonus/ft_animator_b.c
-OBJS		= $(SRCS:.c=.o)
-#BOBJS		= $(BSRCS:.c=.o)<
+SRCS 		= src/*.c
+CYAN		= \033[0;96m
+BLUE		= \033[0;94m
+WHITE		= \033[0;97m
+
 all: $(NAME)
-
-$(NAME): LIBS $(OBJS)
-	$(CC) $(LFLAGS) $(FLAGS) $(SRCS) ./libft/libft.a minilibx/libmlx.a -I ./includes -o $(NAME)
-#bonus: $(BNAME)
-
-#$(BNAME): $(MINILIBX) $(BOBJS)
-#$(CC) $(LFLAGS) $(FLAGS) $(BOBJS) -o $(BNAME) ./ft_printf/libftprintf.a ./libft/libft.a minilibx/libmlx.a
-
+$(NAME): LIBS
+	@$(CC) $(LFLAGS) $(SRCS) ./libft/libft.a minilibx/libmlx.a -I ./includes -o $(NAME)
+	@echo "$(CYAN)so_long is ready to use !$(WHITE)"
 LIBS:
 	@make -C minilibx
 	@make -C libft
+	@echo "$(BLUE)Minilibx $(WHITE)and $(BLUE)LIBFT $(WHITE)Libraries are ready to use !$(WHITE)"
 norm:
-	@norminette src/*.c include/*.h
-#@norminette bonus/*.c
-run: all
+	@norminette src/*.c
+	@norminette includes/*.h
+	@norminette libft/*.c
+	@norminette libft/*.h
+run: re
 	./$(NAME) maps/map_1.ber
 clean:
-	rm -rf $(OBJS)
-#	rm -rf $(BOBJS)
-
+	@rm -rf src/*.o
 fclean: clean
-	rm -rf $(NAME)
-#	rm -rf $(BNAME)
+	@rm -rf $(NAME)
 	@make clean -C minilibx
 	@make fclean -C libft
+	@echo "$(BLUE)Project is clean$(WHITE)"
 re: fclean all
-.PHONY: clean run fclean re all norm

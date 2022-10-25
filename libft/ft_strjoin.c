@@ -21,7 +21,7 @@
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+/*char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new_str;
 	int		i;
@@ -41,4 +41,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		new_str[i++] = s2[j++];
 	new_str[i] = '\0';
 	return (new_str);
+}*/
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		i;
+	int		a;
+	char	*dizi;
+
+	if (!s1)
+	{
+		s1 = (char *)malloc(1);
+		s1[0] = '\0';
+	}
+	if (!s2)
+		return (0);
+	dizi = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dizi)
+		return (0);
+	i = -1;
+	while (s1[++i] != '\0')
+		dizi[i] = s1[i];
+	a = -1;
+	while (s2[++a] != '\0')
+		dizi[i + a] = s2[a];
+	dizi[i + a] = '\0';
+	free (s1);
+	return (dizi);
 }
